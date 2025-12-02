@@ -1,5 +1,5 @@
 const database = {
-  data: [
+   data: [
     {
       question: `let a ={}, b={}
             console.log(a==b)
@@ -124,3 +124,32 @@ const database = {
     },
   ],
 };
+
+let score = 0;
+
+
+function playGame(userAnswer,correctAnswer){
+    if(userAnswer === correctAnswer){
+        console.log("Correct Answer 😃")
+        score++;
+    }else{
+        console.log("Incorrect Answer 😔")
+        console.log(`Correct Answer is ${correctAnswer}`)
+    }
+}
+
+
+function showQuestionsAndOptions(database){
+    for(let i=0;i,database.data.length;i++){
+        console.log(`Q${i + 1} - ${database.data[i].question}\n`);
+        for(let key in database.data[i].options){
+            console.log(`${key} - ${database.data[i].options[key]}`)
+        }
+        let userAnswer = readlineSync.question("enter your answer - (a/b/c/d) - ").toLowerCase();
+        playGame(userAnswer, database.data[i].correctAnswer);
+    }
+    
+}
+
+showQuestionsAndOptions(database);
+console.log(`Your score is ${score} points`);
