@@ -1,9 +1,12 @@
 let readlineSync = require("readline-sync");
+let kuler = require("kuler");
 let score = 0;
 
 let userName = readlineSync.question("Whats your userName ?");
+console.log(kuler(`hello ${userName}, Welcome to Quizzify`, "#dc2626"));
+console.log("select any option by selecting (a/b/c/d) \n");
 
-
+//database for question and answers//
 const database = {
    data: [
     {
@@ -133,36 +136,36 @@ const database = {
 
 
 
-
+//leaderboard data//
 const leaderboard ={
     data:[
         {
-            name:"Ashish",
+            name:"Ashish yarlgadda",
             score:1
         },
         {
-            name:"Piyush",
+            name:"narsimha naidu",
             score: 9,
         },
         {
-            name:"madhav shia reddy",
+            name:"madhav shiva reddy",
             score: 10,
         }
     ]
 }
 function playGame(userAnswer,correctAnswer){
     if(userAnswer === correctAnswer){
-        console.log("Correct Answer 😃")
+        console.log(kuler("Correct Answer 😃","#059669"))
         score++;
     }else{
-        console.log("Incorrect Answer 😔")
+        console.log(kuler("Incorrect Answer 😔","#b91c1c"))
         console.log(`Correct Answer is ${correctAnswer}`)
     }
 }
 
-
+//main logic//
 function showQuestionsAndOptions(database){
-    for(let i=0;i,database.data.length;i++){
+    for(let i=0;i< database.data.length;i++){
         console.log(`Q${i + 1} - ${database.data[i].question}\n`);
         for(let key in database.data[i].options){
             console.log(`${key} - ${database.data[i].options[key]}`)
@@ -173,15 +176,18 @@ function showQuestionsAndOptions(database){
     
 }
 
+//highscorer logic for leaderboard//
+
 function highScorer(leaderboard){
     leaderboard.data.push({name:userName,score:score});
     let sortedscore = leaderboard.data.sort((a,b)=>b.score - a.score);
+    console.log(kuler("\n check your Postion on the leaderbaord 🎉🎊🎇","#fde047"))
     for(let leader of sortedscore){
-        console.log(`${leader.name} - Score : ${leader.score}`)
+        console.log(kuler(`${leader.name} - Score : ${leader.score}`,"#9333ea"))
     }
    
 }
 
 showQuestionsAndOptions(database);
-console.log(`Your score is ${score} points`);
+console.log(kuler(`Your score is ${score} points`,"#5eed"));
 highScorer(leaderboard);
