@@ -1,3 +1,9 @@
+let readlineSync = require("readline-sync");
+let score = 0;
+
+let userName = readlineSync.question("Whats your userName ?");
+
+
 const database = {
    data: [
     {
@@ -125,9 +131,25 @@ const database = {
   ],
 };
 
-let score = 0;
 
 
+
+const leaderboard ={
+    data:[
+        {
+            name:"Ashish",
+            score:1
+        },
+        {
+            name:"Piyush",
+            score: 9,
+        },
+        {
+            name:"madhav shia reddy",
+            score: 10,
+        }
+    ]
+}
 function playGame(userAnswer,correctAnswer){
     if(userAnswer === correctAnswer){
         console.log("Correct Answer 😃")
@@ -151,5 +173,15 @@ function showQuestionsAndOptions(database){
     
 }
 
+function highScorer(leaderboard){
+    leaderboard.data.push({name:userName,score:score});
+    let sortedscore = leaderboard.data.sort((a,b)=>b.score - a.score);
+    for(let leader of sortedscore){
+        console.log(`${leader.name} - Score : ${leader.score}`)
+    }
+   
+}
+
 showQuestionsAndOptions(database);
 console.log(`Your score is ${score} points`);
+highScorer(leaderboard);
